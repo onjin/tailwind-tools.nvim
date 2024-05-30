@@ -2,7 +2,6 @@ local M = {}
 
 local log = require("tailwind-tools.log")
 local config = require("tailwind-tools.config")
-local parsers = require("nvim-treesitter.parsers")
 
 local supported_filetypes = {
   "html",
@@ -26,7 +25,7 @@ M.get_class_nodes = function(bufnr, all)
 
   if not vim.tbl_contains(filetypes, ft) then return end
 
-  local parser = parsers.get_parser(bufnr)
+  local parser = vim.treesitter.get_parser(bufnr)
 
   if not parser then return log.warn("No parser available for " .. ft) end
 
